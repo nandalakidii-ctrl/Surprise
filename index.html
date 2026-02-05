@@ -66,50 +66,53 @@ display:none;
 display:block;
 }
 
-
 /* BUTTERFLIES */
 
 .butterfly{
-position:absolute;
-font-size:24px;
-animation: fly 10s linear infinite;
+position:fixed;
+top:-50px;
+font-size:28px;
+z-index:1;
+pointer-events:none;
+animation: fly linear infinite;
 }
 
 @keyframes fly{
 0%{
-transform:translateY(100vh) translateX(0);
+transform:translateY(0) translateX(0);
 opacity:0;
 }
-20%{opacity:1;}
+10%{opacity:1;}
 100%{
-transform:translateY(-10vh) translateX(100px);
+transform:translateY(110vh) translateX(100px);
 opacity:0;
 }
 }
-
 
 /* FLOWERS */
 
 .flower{
-position:absolute;
-font-size:20px;
-animation: fall 12s linear infinite;
+position:fixed;
+top:-50px;
+font-size:24px;
+z-index:1;
+pointer-events:none;
+animation: fall linear infinite;
 }
 
 @keyframes fall{
 0%{
-transform:translateY(-10vh);
+transform:translateY(0);
 opacity:0;
 }
-20%{opacity:1;}
+10%{opacity:1;}
 100%{
-transform:translateY(100vh);
+transform:translateY(110vh);
 opacity:0;
 }
 }
 
 </style>
-
 </head>
 <body>
 
@@ -121,14 +124,12 @@ opacity:0;
 <button onclick="go(2)">Next</button>
 </div>
 
-
 <!-- PAGE 2 -->
 <div class="card screen" id="page2">
 <h1>It’s small 🌸</h1>
 <p>But I’ve been thinking about it for a while.</p>
 <button onclick="go(3)">Next</button>
 </div>
-
 
 <!-- PAGE 3 -->
 <div class="card screen" id="page3">
@@ -137,9 +138,7 @@ opacity:0;
 
 <button class="yes" onclick="yes()">Yes 💗</button>
 <button class="no" onclick="no()">No 🙂</button>
-
 </div>
-
 
 <!-- YES PAGE -->
 <div class="card screen" id="yesPage">
@@ -147,90 +146,67 @@ opacity:0;
 <p>I knew it 😊</p>
 </div>
 
-
 <!-- NO PAGE -->
 <div class="card screen" id="noPage">
 <h1>Endhuku endhuku ala 😁</h1>
 <p>You still have one more chance to change your answer 💭</p>
 
 <button class="yes" onclick="go(3)">Think again 😁</button>
-
 </div>
-
 
 
 <script>
 
-/* PAGE NAVIGATION */
-
 function go(page){
-document.querySelectorAll(".screen").forEach(s=>{
-s.classList.remove("active")
-})
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"))
 document.getElementById("page"+page).classList.add("active")
 }
 
 function yes(){
-document.querySelectorAll(".screen").forEach(s=>{
-s.classList.remove("active")
-})
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"))
 document.getElementById("yesPage").classList.add("active")
 }
 
 function no(){
-document.querySelectorAll(".screen").forEach(s=>{
-s.classList.remove("active")
-})
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"))
 document.getElementById("noPage").classList.add("active")
 }
 
 
+/* BUTTERFLIES */
 
-/* CREATE BUTTERFLIES */
-
-for(let i=0;i<8;i++){
+for(let i=0;i<12;i++){
 
 let b=document.createElement("div")
 
 b.className="butterfly"
-
 b.innerHTML="🦋"
 
 b.style.left=Math.random()*100+"vw"
-
-b.style.animationDuration=(8+Math.random()*5)+"s"
-
+b.style.animationDuration=(6+Math.random()*6)+"s"
 b.style.animationDelay=Math.random()*5+"s"
 
 document.body.appendChild(b)
-
 }
 
 
+/* FLOWERS */
 
-/* CREATE FLOWERS */
-
-for(let i=0;i<10;i++){
+for(let i=0;i<15;i++){
 
 let f=document.createElement("div")
 
 f.className="flower"
-
 f.innerHTML="🌸"
 
 f.style.left=Math.random()*100+"vw"
-
-f.style.animationDuration=(10+Math.random()*5)+"s"
-
+f.style.animationDuration=(8+Math.random()*6)+"s"
 f.style.animationDelay=Math.random()*5+"s"
 
 document.body.appendChild(f)
-
 }
 
-
 </script>
-
 
 </body>
 </html>
