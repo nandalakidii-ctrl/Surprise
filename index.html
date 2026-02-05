@@ -2,77 +2,238 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Just One Question</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mokshana 💗</title>
 
 <style>
-* { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  height: 100vh;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
-  overflow: hidden;
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+font-family: Arial;
+overflow:hidden;
 }
 
-/* Screens */
-.screen {
-  display: none;
-  height: 100vh;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+/* CARD */
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+width:85%;
+max-width:350px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+position:relative;
+z-index:10;
 }
 
-.screen.active {
-  display: flex;
+h1{
+color:#ff4d6d;
 }
 
-/* Card */
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  width: 90%;
-  max-width: 360px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
 }
 
-h1 {
-  color: #ff4d6d;
+button:hover{
+transform:scale(1.05);
 }
 
-p {
-  font-size: 18px;
+.yes{
+background:#ff4d6d;
+color:white;
 }
 
-/* Buttons */
-button {
-  margin-top: 20px;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  cursor: pointer;
+.no{
+background:#ddd;
 }
 
-.yes {
-  background: #ff4d6d;
-  color: white;
+.screen{
+display:none;
 }
 
-.no {
-  background: #ddd;
+.active{
+display:block;
 }
 
-/* Butterflies */
-.butterfly {
-  position: absolute;
-  font-size: 24px;
-  animation: float 10s linear infinite;
+
+/* BUTTERFLIES */
+
+.butterfly{
+position:absolute;
+font-size:24px;
+animation: fly 10s linear infinite;
 }
+
+@keyframes fly{
+0%{
+transform:translateY(100vh) translateX(0);
+opacity:0;
+}
+20%{opacity:1;}
+100%{
+transform:translateY(-10vh) translateX(100px);
+opacity:0;
+}
+}
+
+
+/* FLOWERS */
+
+.flower{
+position:absolute;
+font-size:20px;
+animation: fall 12s linear infinite;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-10vh);
+opacity:0;
+}
+20%{opacity:1;}
+100%{
+transform:translateY(100vh);
+opacity:0;
+}
+}
+
+</style>
+
+</head>
+<body>
+
+
+<!-- PAGE 1 -->
+<div class="card screen active" id="page1">
+<h1>Hey Mokshana 👀</h1>
+<p>I just wanted to tell you something...</p>
+<button onclick="go(2)">Next</button>
+</div>
+
+
+<!-- PAGE 2 -->
+<div class="card screen" id="page2">
+<h1>It’s small 🌸</h1>
+<p>But I’ve been thinking about it for a while.</p>
+<button onclick="go(3)">Next</button>
+</div>
+
+
+<!-- PAGE 3 -->
+<div class="card screen" id="page3">
+<h1>So here it is 💗</h1>
+<p>Will you be my Valentine?</p>
+
+<button class="yes" onclick="yes()">Yes 💗</button>
+<button class="no" onclick="no()">No 🙂</button>
+
+</div>
+
+
+<!-- YES PAGE -->
+<div class="card screen" id="yesPage">
+<h1>Yayyy 💗💗</h1>
+<p>I knew it 😊</p>
+</div>
+
+
+<!-- NO PAGE -->
+<div class="card screen" id="noPage">
+<h1>Endhuku endhuku ala 😁</h1>
+<p>You still have one more chance to change your answer 💭</p>
+
+<button class="yes" onclick="go(3)">Think again 😁</button>
+
+</div>
+
+
+
+<script>
+
+/* PAGE NAVIGATION */
+
+function go(page){
+document.querySelectorAll(".screen").forEach(s=>{
+s.classList.remove("active")
+})
+document.getElementById("page"+page).classList.add("active")
+}
+
+function yes(){
+document.querySelectorAll(".screen").forEach(s=>{
+s.classList.remove("active")
+})
+document.getElementById("yesPage").classList.add("active")
+}
+
+function no(){
+document.querySelectorAll(".screen").forEach(s=>{
+s.classList.remove("active")
+})
+document.getElementById("noPage").classList.add("active")
+}
+
+
+
+/* CREATE BUTTERFLIES */
+
+for(let i=0;i<8;i++){
+
+let b=document.createElement("div")
+
+b.className="butterfly"
+
+b.innerHTML="🦋"
+
+b.style.left=Math.random()*100+"vw"
+
+b.style.animationDuration=(8+Math.random()*5)+"s"
+
+b.style.animationDelay=Math.random()*5+"s"
+
+document.body.appendChild(b)
+
+}
+
+
+
+/* CREATE FLOWERS */
+
+for(let i=0;i<10;i++){
+
+let f=document.createElement("div")
+
+f.className="flower"
+
+f.innerHTML="🌸"
+
+f.style.left=Math.random()*100+"vw"
+
+f.style.animationDuration=(10+Math.random()*5)+"s"
+
+f.style.animationDelay=Math.random()*5+"s"
+
+document.body.appendChild(f)
+
+}
+
+
+</script>
+
+
+</body>
+</html>}
 
 @keyframes float {
   from {
